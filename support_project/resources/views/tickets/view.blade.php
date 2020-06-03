@@ -1,1 +1,1 @@
-{{ $rows }}
+@extends('layouts.main')

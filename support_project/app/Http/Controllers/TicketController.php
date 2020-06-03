@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -10,16 +9,16 @@ class TicketController extends Controller
     public function view($ticket)
     {
         try {
-            $data = JWT::decode($ticket, env('ENCODE_KEY'), array('HS256'));
+            $data = json_decode( base64_decode( $ticket ) );
         } catch (\Exception $e) {
-            //return \Response::view('errors.404',array(),404);
             abort(404, $e->getMessage());
         }
+        if (!isset($data->id)) {
+            abort(404, 'Invalid ticket id');
+        }
 
-        return $data;
+        $row = \App\Tickets::where('id', $data->id)->first();
 
-        $rows = \App\Tickets::where('id', 158)->get();
-        return $rows;
-        return $this->view('welcome', ['rows' => $rows]);
+        return view('tickets.view', ['row' => $row]);
     }
 }
