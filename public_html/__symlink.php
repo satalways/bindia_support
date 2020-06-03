@@ -1,3 +1,14 @@
 <?php
 
-var_dump(symlink("D:\development\support\support_project\storage\app\public", "D:\development\support\public_html\storage"));
+$fromPath = realpath(__DIR__ . '/../support_project/storage/app/public');
+$toPath = __DIR__ . '/storage';
+
+try {
+    if (symlink($fromPath, $toPath)) {
+        echo 'OK';
+    } else {
+        echo 'Symlink not done.';
+    }
+} catch (Exception $e) {
+    echo $e->getMessage();
+}

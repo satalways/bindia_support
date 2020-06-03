@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 
 Route::get('/ticket/view/{token}', 'TicketController@view')->name('view.ticket');
+Route::put('/ticket/view/{token}', 'TicketController@save_reply')->name('view.ticket.put');
+Route::get('/ticket/view/file/{id}/{file}', 'TicketController@file')->name('view.file');
