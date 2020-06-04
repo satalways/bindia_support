@@ -7,7 +7,7 @@
         </div>
 
         <div class="subject">
-            Subject: {{ $row->subject }}
+            Subject: <span style="font-size: 90%">{{ $row->subject }}</span>
         </div>
 
         <div class="box">
@@ -48,7 +48,7 @@
                 <div class="col-md-12 message_row">
                     <div class="title">
                         <div class="float-right">
-                            <a href="#" class="reply_link">Reply</a>
+                            <a href="#" class="reply_link btn btn-sm btn-success">Reply</a>
                         </div>
                         From: <b>{{ $message->from_name }}</b>
                         &lt;{{ $message->from_email }}&gt;<br>
@@ -63,7 +63,7 @@
                             @forelse($message->get_files() as $file)
                                 <a target="_blank" class="btn btn-sm btn-primary"
                                    href="{{ $file->url }}">
-                                    {{ $file->filename }} (<small style="color: #fff">{{ $file->filesize }}</small>)
+                                    {{ $file->filename }} <span style="font-size:70%;color:#fff;">({{ $file->filesize }})</span>
                                 </a>
                             @empty
                                 <small>No file is attached</small>

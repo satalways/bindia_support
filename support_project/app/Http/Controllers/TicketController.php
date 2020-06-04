@@ -8,6 +8,7 @@ use App\TicketsDetails;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use function GuzzleHttp\Psr7\mimetype_from_filename;
 
 class TicketController extends Controller
 {
@@ -142,7 +143,7 @@ class TicketController extends Controller
         }
 
         $fileContent = Storage::disk($storage_name)->get($path);
-        $mime = \GuzzleHttp\Psr7\mimetype_from_filename($path);
+        $mime = mimetype_from_filename($path);
 
         return response()->make($fileContent, '200', [
             'Content-Type' => $mime,
@@ -150,7 +151,9 @@ class TicketController extends Controller
             'Cache-Control' => 'must-revalidate',
             'Pragma' => 'public',
             'Content-Length' => strlen($fileContent),
-            'Content-Disposition' => 'inline; filename="' . basename($path) . '"'
+            'Content-Disposition' => 'inline; filename="' . basename($path) . '"',
+            'Content-Transfer-Encoding' => 'binary',
+            'Accept-Ranges' => 'bytes'
         ]);
     }
 }
