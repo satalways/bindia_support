@@ -107,10 +107,9 @@ class TicketController extends Controller
                     $m->to($array->to_email);
                 }
 
-                $m->from('support@bindia.dk', 'Bindia');
+                $m->from('office@bindia.dk', 'Bindia');
                 if ($array->attached == 1) {
                     foreach (request()->file('files') as $file) {
-//                        $m->attachFromStorageDisk($array->storage_name, $file->get());
                         $m->attachData($file->get(), $file->getClientOriginalName());
                     }
                 }
