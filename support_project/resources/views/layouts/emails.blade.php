@@ -11,7 +11,7 @@
     style="background-color: #fff; width: 600px; padding: 10px; border: 1px solid #c9c9c9; margin:15px auto; border-radius: 5px; color: #8a8a8b">
     <div style="text-align:right;">
         <a href="https://www.bindia.dk">
-            <img src="https://www.bindia.dk/themes/2016/img/logo.png" style="width: 80px;" />
+            <img src="https://www.bindia.dk/themes/2016/img/logo.png" style="width: 80px; background-color: #000; padding: 5px; border-radius: 3px;" />
         </a>
     </div>
     <div style="margin: 35px 30px 40px 30px">
