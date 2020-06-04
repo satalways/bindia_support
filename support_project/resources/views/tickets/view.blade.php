@@ -6,22 +6,28 @@
         Support Tickets
     </div>
 
-    <div class="row">
+    <div class="row header_row">
         <div class="col-md-6">
             Ticket By <b>{{ $row->from_name }} &lt;{{ $row->from_email }}&gt;</b>
         </div>
         <div class="col-md-6">
             Created at <b>{{ $row->created_at->diffForHumans() }}</b>
-            ({{ $row->created_at->format( env('DATETIME_FORMAT') ) }})
+            {{ $row->created_at ? '(' . $row->created_at->format( config('options.datetime_format') ) . ')' : '' }}
         </div>
     </div>
-    <div class="row">
+    <div class="row header_row">
         <div class="col-md-6">
             Ticket Number: <b>{{ $row->ticket_number }}</b>
         </div>
         <div class="col-md-6">
             Last Updated:
-            <b>{{ $row->details[0]->created_at ? $row->details[0]->created_at->diffForHumans() : '' }}</b> {{ $row->details[0]->created_at ? $row->details[0]->created_at->format(env('DATETIME_FORMAT')) : '' }}
+            <b>{{ $row->details[0]->created_at ? $row->details[0]->created_at->diffForHumans() : '' }}</b>
+            {{ $row->details[0]->created_at ? '(' . $row->details[0]->created_at->format(config('options.datetime_format')) . ')' : '' }}
+        </div>
+    </div>
+    <div class="row header_row">
+        <div class="col-md-6">
+            Responsible: {!! $row->assigned_to ? '<b>'.user($row->assigned_to)->username.'</b>' : '<i>Not yet</i>' !!}
         </div>
     </div>
 
@@ -39,7 +45,7 @@
                         From: <img src="{{ $message->get_image_url() }}"> <b>{{ $message->from_name }}</b>
                         &lt;{{ $message->from_email }}&gt;<br>
                         Time: {{ $message->created_at ? $message->created_at->diffForHumans() : 'Unknown' }}
-                        {{ $message->created_at ? '(' . $message->created_at->format(env('DATETIME_FORMAT')) . ')' : '' }}
+                        {{ $message->created_at ? '(' . $message->created_at->format(config('options.datetime_format')) . ')' : '' }}
                     </div>
                     <div class="content">
                         {!! $message->content !!}
@@ -63,20 +69,23 @@
             <div class="col-md-12 reply">
                 <hr>
                 <h3 id="reply_title">Reply Ticket</h3>
-                <form action="{{ route('view.ticket.put', urlencode($ticket)) }}" id="ticket_reply_form" method="post" enctype="multipart/form-data">
+                <form action="{{ route('view.ticket.put', urlencode($ticket)) }}" id="ticket_reply_form" method="post"
+                      enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="row">
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label>Your name:</label>
-                                <input value="{{ $row->from_name }}" type="text" class="form-control" placeholder="Your name" readonly>
+                                <input value="{{ $row->from_name }}" type="text" class="form-control"
+                                       placeholder="Your name" readonly>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label>Your email:</label>
-                                <input value="{{ $row->from_email }}" type="text" class="form-control" placeholder="Your email address" readonly>
+                                <input value="{{ $row->from_email }}" type="text" class="form-control"
+                                       placeholder="Your email address" readonly>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -88,13 +97,14 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            @error('content')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                            @error('content')
+                            <div class="alert alert-danger">{{ $message }}</div>@enderror
                             <textarea name="content" class="summernote">{{ old('content') ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col">
                         <input type="file" name="files[]" multiple="multiple" class="ezdz"
-                            accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx,.zip,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                               accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx,.zip,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                     </div>
                 </form>
             </div>

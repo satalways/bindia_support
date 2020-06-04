@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => env('MAIL_HOST', 'adminserver.bindia.dk'),
+            'port' => env('MAIL_PORT', 25),
+            'encryption' => env('MAIL_ENCRYPTION', null),
+            'username' => env('MAIL_USERNAME', 'bindia@admin.bindia.dk'),
+            'password' => env('MAIL_PASSWORD', 'JvIX)V2HwQ5_'),
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -84,8 +84,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'office@bindia.dk'),
+        'name' => env('APP_NAME', 'Bindia'),
     ],
 
     /*
