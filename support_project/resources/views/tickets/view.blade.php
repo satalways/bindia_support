@@ -31,6 +31,10 @@
         </div>
     </div>
 
+    @if($errors->any())
+        <div class="alert alert-danger">Error: {{$errors->first()}}</div>
+    @endif
+
     <div class="messages">
         <div class="subject">
             Subject: {{ $row->subject }}
@@ -55,7 +59,7 @@
                             @forelse($message->get_files() as $file)
                                 <a target="_blank" class="btn btn-sm btn-primary"
                                    href="{{ $file->url }}">
-                                    {{ $file->filename }}
+                                    {{ $file->filename }} (<small style="color: #fff">{{ $file->filesize }}</small>)
                                 </a>
                             @empty
                                 <small>No file is attached</small>
