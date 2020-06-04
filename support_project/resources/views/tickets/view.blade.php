@@ -1,33 +1,40 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="text-center p-3">
-        <img src="https://www.bindia.dk/themes/2016/img/logo.png" alt=""><br>
-        Support Tickets
-    </div>
+    <div class="header">
+        <div class="text-right">
+            <img src="https://www.bindia.dk/themes/2016/img/logo.png" alt="" style="width:80px"><br>
+        </div>
 
-    <div class="row header_row">
-        <div class="col-md-6">
-            Ticket By <b>{{ $row->from_name }} &lt;{{ $row->from_email }}&gt;</b>
+        <div class="subject">
+            Subject: {{ $row->subject }}
         </div>
-        <div class="col-md-6">
-            Created at <b>{{ $row->created_at->diffForHumans() }}</b>
-            {{ $row->created_at ? '(' . $row->created_at->format( config('options.datetime_format') ) . ')' : '' }}
-        </div>
-    </div>
-    <div class="row header_row">
-        <div class="col-md-6">
-            Ticket Number: <b>{{ $row->ticket_number }}</b>
-        </div>
-        <div class="col-md-6">
-            Last Updated:
-            <b>{{ $row->details[0]->created_at ? $row->details[0]->created_at->diffForHumans() : '' }}</b>
-            {{ $row->details[0]->created_at ? '(' . $row->details[0]->created_at->format(config('options.datetime_format')) . ')' : '' }}
-        </div>
-    </div>
-    <div class="row header_row">
-        <div class="col-md-6">
-            Responsible: {!! $row->assigned_to ? '<b>'.user($row->assigned_to)->username.'</b>' : '<i>Not yet</i>' !!}
+
+        <div class="box">
+            <div class="row header_row">
+                <div class="col-md-6">
+                    Ticket By <b>{{ $row->from_name }} &lt;{{ $row->from_email }}&gt;</b>
+                </div>
+                <div class="col-md-6">
+                    Created at <b>{{ $row->created_at->diffForHumans() }}</b>
+                    {{ $row->created_at ? '(' . $row->created_at->format( config('options.datetime_format') ) . ')' : '' }}
+                </div>
+            </div>
+            <div class="row header_row">
+                <div class="col-md-6">
+                    Ticket Number: <b>{{ $row->ticket_number }}</b>
+                </div>
+                <div class="col-md-6">
+                    Last Updated:
+                    <b>{{ $row->details[0]->created_at ? $row->details[0]->created_at->diffForHumans() : '' }}</b>
+                    {{ $row->details[0]->created_at ? '(' . $row->details[0]->created_at->format(config('options.datetime_format')) . ')' : '' }}
+                </div>
+            </div>
+            <div class="row header_row">
+                <div class="col-md-6">
+                    Responsible: {!! $row->assigned_to ? '<b>'.user($row->assigned_to)->username.'</b>' : '<i>Not yet</i>' !!}
+                </div>
+            </div>
         </div>
     </div>
 
@@ -36,9 +43,6 @@
     @endif
 
     <div class="messages">
-        <div class="subject">
-            Subject: {{ $row->subject }}
-        </div>
         @foreach($row->details as $message)
             <div class="row">
                 <div class="col-md-12 message_row">
@@ -46,7 +50,7 @@
                         <div class="float-right">
                             <a href="#" class="reply_link">Reply</a>
                         </div>
-                        From: <img src="{{ $message->get_image_url() }}"> <b>{{ $message->from_name }}</b>
+                        From: <b>{{ $message->from_name }}</b>
                         &lt;{{ $message->from_email }}&gt;<br>
                         Time: {{ $message->created_at ? $message->created_at->diffForHumans() : 'Unknown' }}
                         {{ $message->created_at ? '(' . $message->created_at->format(config('options.datetime_format')) . ')' : '' }}

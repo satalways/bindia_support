@@ -5,10 +5,6 @@
   margin-top: 10px;
   padding: 10px;
 }
-.messages .subject {
-  font-weight: bold;
-  font-size: 150%;
-}
 .messages .message_row {
   border: 1px solid #c9c9c9;
   margin: 5px 0;
@@ -41,7 +37,22 @@ a.reply_link:hover {
   border-radius: 0;
   margin-top: 5px;
 }
-div.header_row {
+div.header {
+  margin: 10px 0;
+}
+div.header .subject {
+  font-weight: bold;
+  font-size: 150%;
+  border-bottom: 1px solid #c9c9c9;
+  margin-bottom: 15px;
+}
+div.header div.box {
+  border: 1px solid #c9c9c9;
+  padding: 15px;
+  background-color: #F5F5F5;
+  border-radius: 5px;
+}
+div.header div.box div.header_row {
   line-height: 2;
 }
 /*# sourceMappingURL=styles.css.map */
