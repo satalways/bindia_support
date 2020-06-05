@@ -39,7 +39,7 @@ function my_ip() {
     } elseif ( getenv( 'HTTP_FORWARDED' ) ) {
         $ip = getenv( 'HTTP_FORWARDED' );
     } else {
-        $ip = @$_SERVER['REMOTE_ADDR'];
+        $ip = $_SERVER['REMOTE_ADDR'] ?? '';
     }
 
     return $ip;

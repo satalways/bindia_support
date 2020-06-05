@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use function GuzzleHttp\Psr7\mimetype_from_filename;
+use Illuminate\Support\Facades\Crypt;
 
 class TicketController extends Controller
 {
@@ -16,6 +17,11 @@ class TicketController extends Controller
 
     public function view($ticket)
     {
+        return Crypt::encryptString('Hello world.');
+        //return Crypt::decryptString('eyJpdiI6Ik8vblEyZnh5QXc4TERtWXR5bUtLZUE9PSIsInZhbHVlIjoidm93M3E5Z1hNRGZGS0JmS1VCVFVnUT09IiwibWFjIjoiZGE0MTQ0NzIwYjA1MmM2ODc4Mzk5NWM1ZTU5ZTI1NWNhYzc4N2Q5ZjlmOGYyOGQ2YzhkODRkYTU0MTlmM2Y5ZCJ9');
+        //return decrypt('eyJpdiI6Ik8vblEyZnh5QXc4TERtWXR5bUtLZUE9PSIsInZhbHVlIjoidm93M3E5Z1hNRGZGS0JmS1VCVFVnUT09IiwibWFjIjoiZGE0MTQ0NzIwYjA1MmM2ODc4Mzk5NWM1ZTU5ZTI1NWNhYzc4N2Q5ZjlmOGYyOGQ2YzhkODRkYTU0MTlmM2Y5ZCJ9');
+        //return decrypt('eyJpdiI6Im1YUHhrZVg3NnQ0RHlZUkV1Ny90V1E9PSIsInZhbHVlIjoiY3pERzd6VkIvMzI0cExLcmVpYmRJODhJTU43eWE2dm4yQ09zOGlpUE9pUT0iLCJtYWMiOiJiYmRjNzVmMTg3MTcwOGVkN2Y5N2ZhNmJjMDE4ZjlmY2JlZWY4NTFjMDkyZTBlZDljY2ZhZGQ2MzFkNTI2MGY2In0=');
+
         try {
             $data = json_decode(base64_decode($ticket));
         } catch (\Exception $e) {
