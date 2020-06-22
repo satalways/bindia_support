@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function isStaffEmail(string $emailAddress = ''): bool
+    {
+        return self::where('email', $emailAddress)->count() > 0;
+    }
 }

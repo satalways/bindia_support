@@ -51,7 +51,7 @@
                             <a href="#" class="reply_link btn btn-sm btn-success">Reply</a>
                         </div>
                         From: <b>{{ $message->from_name }}</b>
-                        &lt;{{ $message->from_email }}&gt;<br>
+                        {!! \App\User::isStaffEmail($message->from_email) ? '' : '&lt;' . $message->from_email . '&gt;' !!}<br>
                         Time: {{ $message->created_at ? $message->created_at->diffForHumans() : 'Unknown' }}
                         {{ $message->created_at ? '(' . $message->created_at->format(config('options.datetime_format')) . ')' : '' }}
                     </div>
