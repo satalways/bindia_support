@@ -30,11 +30,6 @@
                     {{ $row->details[0]->created_at ? '(' . $row->details[0]->created_at->format(config('options.datetime_format')) . ')' : '' }}
                 </div>
             </div>
-            <div class="row header_row">
-                <div class="col-md-6">
-                    Responsible: {!! $row->assigned_to ? '<b>'.user($row->assigned_to)->username.'</b>' : '<i>Not yet</i>' !!}
-                </div>
-            </div>
         </div>
     </div>
 
@@ -125,7 +120,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css"
           integrity="sha256-ztUDTRE0Jq4ZR/ZKD+fivOhevPPuiXD0ua7M+3OE+t4=" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ezdz@0.4.3/src/jquery.ezdz.css">
-    <link rel="stylesheet" href="{{ url('assets/styles.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/styles.css') }}?v=4">
 @endsection
 
 
