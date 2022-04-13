@@ -31,13 +31,15 @@ class TicketController extends Controller
             abort(404, 'Invalid ticket id');
         }
 
-        $row = \App\Tickets::findorFail($data->id);
+        return redirect('https://admin.bindia.dk/tickets.html?viewTicket=' . $data->id);
 
-        return view('tickets.view', [
-            'row' => $row,
-            'title' => 'View Ticket #' . $row->ticket_number,
-            'ticket' => $ticket
-        ]);
+//        $row = \App\Tickets::findorFail($data->id);
+//
+//        return view('tickets.view', [
+//            'row' => $row,
+//            'title' => 'View Ticket #' . $row->ticket_number,
+//            'ticket' => $ticket
+//        ]);
     }
 
     public function save_reply($ticket)
